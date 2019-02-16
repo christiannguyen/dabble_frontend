@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import store, { history } from './store'
 import App from './containers/app'
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
 
 import 'sanitize.css/sanitize.css'
 import './index.css'

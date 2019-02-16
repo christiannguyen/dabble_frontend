@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -8,12 +8,29 @@ import {
   decrement,
   decrementAsync
 } from '../../modules/counter'
+import axios from 'axios';
 
-const Home = props => (
+const Home = props => {
+
+  useEffect(() => {
+    axios.get('api/trip', {withCredentials: true })
+  }, [])
+
+  return (
   <div>
     <h1>Home</h1>
     <p>Count: {props.count}</p>
-
+    <button onClick={() => {
+      console.log('hit this');
+      axios.get('api/trip', {withCredentials: true })
+    }}>testing</button>
+        <button onClick={() => {
+      console.log('hit this');
+      axios.post('api/login', {withCredentials: true }, { data: {
+        username: 'test',
+        password: 'pass',
+      }})
+    }}>login</button>
     <p>
       <button onClick={props.increment}>Increment</button>
       <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
@@ -33,8 +50,8 @@ const Home = props => (
         Go to about page via redux
       </button>
     </p>
-  </div>
-)
+  </div>)
+}
 
 const mapStateToProps = ({ counter }) => ({
   count: counter.count,
