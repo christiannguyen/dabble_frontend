@@ -1,9 +1,10 @@
 import React from 'react'
+import AddActivityButton from 'components/addActivityButton/addActivityButton';
+
 
 const About = () => (
   <div>
-    <h1>About Page</h1>
-    <p>Did you get here via Redux?</p>
+    <AddActivityButton />
   </div>
 )
 

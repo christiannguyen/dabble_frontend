@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CardContainer = styled.div`
+const ActivityCardContainer = styled.div`
   border: 1px solid #f2f2f2;
   width: 300px;
   height: 400px;
@@ -36,15 +36,15 @@ const Address = styled.p`
 
 `;
 
-function Card(props) {
+function ActivityCard(props) {
   return (
-    <CardContainer>
+    <ActivityCardContainer>
       <ImageContainer />
       <DescriptionContainer>
         <Title>Cafe Play</Title>
       </DescriptionContainer>
-    </CardContainer>
+    </ActivityCardContainer>
   )
 }
 
-export default Card;
+export default Activity;

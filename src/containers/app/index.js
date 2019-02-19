@@ -5,6 +5,7 @@ import About from '../about'
 import Trips from '../trips';
 import Login from '../login';
 import Register from '../register';
+import Trip from '../trip';
 
 
 const App = () => (
@@ -15,6 +16,7 @@ const App = () => (
       <Route exact path="/trips" component={Trips} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
+      <Route exact path="/trip" component={Trip} />
     </main>
   </div>
 )

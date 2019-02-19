@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux'
-// import counter from './counter'
+import * as ActivitiesReducer from 'duck/activities/reducers';
 
 export default combineReducers({
-  // counter
+  ...ActivitiesReducer,
 })

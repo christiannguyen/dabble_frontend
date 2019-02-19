@@ -1,19 +1,19 @@
 const axios = require('axios');
 
-export function baseGet(url = '', data = {}) {
+export function baseGet(url = '', params = {}) {
   return axios({
     method: 'get',
     url,
-    data,
+    data: params,
     withCredentials: true,
   });
 };
 
-export function basePost(url = '', data = {}) {
+export function basePost(url = '', params = {}) {
   return axios({
     method: 'post',
     url,
-    data,
+    data: params,
     withCredentials: true,
   });
 };
