@@ -5,6 +5,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import AddActivityButton from 'components/addActivityButton/addActivityButton';
 import Activity from 'components/activity/activity';
 import ActivitySearch from 'containers/activitySearch';
+import AddActivityModal from 'components/addActivityModal/addActivityModal';
 
 const TripContainer = styled.div`
   background-color: #f5f5f5;
@@ -38,6 +39,7 @@ const Trip = () => {
 
   return (
     <DragDropContextProvider backend={HTML5Backend}>
+    <AddActivityModal />
       <TripContainer>
         <SidebarContainer>
           <AddActivityButton/>

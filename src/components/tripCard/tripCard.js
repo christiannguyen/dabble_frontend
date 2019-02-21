@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import { DateRangePicker } from 'react-dates';
 
 const TripCardContainer = styled.div`
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);

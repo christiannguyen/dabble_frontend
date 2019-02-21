@@ -7,7 +7,6 @@ import Login from '../login';
 import Register from '../register';
 import Trip from '../trip';
 
-
 const App = () => (
   <div>
     <main>
