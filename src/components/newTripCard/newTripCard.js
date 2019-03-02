@@ -44,27 +44,31 @@ const CancelButton = styled.div`
   &:hover {
     color: #000;
   }
-`
+`;
 
 const CreateTripButton = styled.button`
   /* background-color: #7f7b92; */
   align-self: center;
+  border-radius: 10px;
+  color: #fff;
   width: 250px;
   background-color: blue;
 `;
 
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+  { value: 'San Diego, CA', label: 'San Diego, CA' },
+  { value: 'San Jose, CA', label: 'San Jose, CA' },
+  { value: 'Los Angeles, CA', label: 'Los Angeles, CA' },
+  { value: 'Berkeley, CA', label: 'Berkeley, CA' },
+  { value: 'California', label: 'California, USA' },
+  { value: 'New York City, NY', label: 'New York City, NY' },
+  { value: 'New York, USA', label: 'New York, USA' },
 ];
 
 class NewTripCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCreating: false
-    };
+  state = {
+    isCreating: false,
+    focusedInput: null,
   }
 
   handleCardClick = () => {
@@ -76,14 +80,25 @@ class NewTripCard extends React.Component {
   handleCancel = () => {
     this.setState({
       isCreating: false,
-    })
+    });
+  }
+
+  handleDateChange = ({ startDate, endDate }) => {
+    const { selectTripDates } = this.props;
+
+    selectTripDates({
+      startDate,
+      endDate,
+    });
   }
 
   render() {
+    const { newTripDetails: { startDate, endDate } } = this.props;
+    const { isCreating, focusedInput } = this.state;
     return (
       <div>
-        {this.state.isCreating ?
-          <CardContainer>
+        {isCreating
+          ? <CardContainer>
             <TopRow>
               <Select
                 className="location-select-container"
@@ -94,16 +109,25 @@ class NewTripCard extends React.Component {
               />
               <CancelButton onClick={this.handleCancel}>X</CancelButton>
             </TopRow>
+            <DateRangePicker
+              startDate={startDate}
+              startDateId="your_unique_start_date_id"
+              endDate={endDate}
+              endDateId="your_unique_end_date_id"
+              onDatesChange={this.handleDateChange}
+              focusedInput={focusedInput} //
+              onFocusChange={newFocusInput => this.setState({ focusedInput: newFocusInput })}
+            />
             <CreateTripButton>Add Trip</CreateTripButton>
-          </CardContainer> :
-          <NewTripCardContainer
+            </CardContainer>
+          : <NewTripCardContainer
             onClick={this.handleCardClick}
           >
            + New Trip
-         </NewTripCardContainer>
+            </NewTripCardContainer>
       }
       </div>
-    )
+    );
   }
 }
 

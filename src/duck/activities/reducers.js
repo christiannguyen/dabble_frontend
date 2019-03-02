@@ -5,11 +5,11 @@ const initialSearchActivites = {
   loading: false,
   searchInput: '',
   searchResults: [],
-  error:  null,
+  error: null,
 }
 
 export function searchActivities(state = initialSearchActivites, { type, payload }) {
-  switch(type) {
+  switch (type) {
     case ActivitiesActionTypes.handleSearchInput:
       return {
         ...state,
@@ -48,7 +48,7 @@ const initialActivityTimes = {
 }
 
 export function activityTimes(state = initialActivityTimes, { type, payload }) {
-  switch(type) {
+  switch (type) {
     case ActivitiesActionTypes.setActivityTime:
       return {
         ...state,

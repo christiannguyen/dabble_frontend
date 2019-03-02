@@ -6,9 +6,9 @@ import AddActivityButton from 'components/addActivityButton/addActivityButton';
 import Activity from 'components/activity/activity';
 import ActivitySearch from 'containers/activitySearch/activitySearch';
 import AddActivityModal from 'components/addActivityModal/addActivityModal';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { setActivityTime } from 'duck/activities/actions'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { setActivityTime } from 'duck/activities/actions';
 
 const TripContainer = styled.div`
   background-color: #f5f5f5;
@@ -25,7 +25,7 @@ const SidebarContainer = styled.div`
   width: 300px;
   background-color: #fff;
   height: 100vh;
-`
+`;
 
 const MyTripsContainer = styled.div`
   width: 1000px;
@@ -39,33 +39,30 @@ const Trip = (props) => {
   // useEffect(() => {
   //   baseGet('api/trip');
   // }, [])
-  console.log('props', props)
+  console.log('props', props);
 
   return (
     <DragDropContextProvider backend={HTML5Backend}>
-    {/* <AddActivityModal actionCreators={props.actionCreators} activityTimes={props.activityTimes}/> */}
+      {/* <AddActivityModal actionCreators={props.actionCreators} activityTimes={props.activityTimes}/> */}
       <TripContainer>
-        <SidebarContainer>
-        </SidebarContainer>
-        <MainViewContainer><ActivitySearch/></MainViewContainer>
+        <SidebarContainer />
+        <MainViewContainer><ActivitySearch /></MainViewContainer>
       </TripContainer>
     </DragDropContextProvider>
-  )
-}
+  );
+};
 
 
-const mapStateToProp = (state) => ({
+const mapStateToProp = state => ({
   activityTimes: state.activityTimes,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actionCreators: {
-      ...bindActionCreators({
-        setActivityTime,
-      }, dispatch
-    )}
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  actionCreators: {
+    ...bindActionCreators({
+      setActivityTime,
+    }, dispatch),
+},
+});
 
 export default connect(mapStateToProp, mapDispatchToProps)(Trip);

@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import Home from '../home'
 import About from '../about'
-import Trips from '../trips';
+import Trips from '../trips/trips';
 import Login from '../login';
 import Register from '../register';
 import Trip from '../trip/trip';

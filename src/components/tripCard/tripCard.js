@@ -42,18 +42,15 @@ class TripCard extends React.Component {
       focusedInput: null,
     };
   }
+
   render() {
-
-  const { newTrip } = this.props;
-
-  console.log('state', this.state);
-  console.log()
-  return (
-    <React.Fragment>
-      {newTrip ?
-        <NewTripCardContainer>+ New Trip</NewTripCardContainer> :
-        <TripCardContainer>Hello</TripCardContainer>
-      }
+    const { newTrip } = this.props;
+    return (
+      <React.Fragment>
+        {newTrip ?
+          <NewTripCardContainer>+ New Trip</NewTripCardContainer> :
+          <TripCardContainer>Hello</TripCardContainer>
+        }
         <DateRangePicker
           startDateId="startDate"
           endDateId="endDate"
@@ -63,9 +60,9 @@ class TripCard extends React.Component {
           focusedInput={this.state.focusedInput}
           onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
         />
-    </React.Fragment>
-  )
-}
+      </React.Fragment>
+    )
+  }
 }
 
 export default TripCard;
