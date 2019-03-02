@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { baseGet } from 'libs/api';
 import TripCard from 'components/tripCard/tripCard';
+import NewTripCard from 'components/newTripCard/newTripCard';
 
 const TripsContainer = styled.div`
   background-color: #f5f5f5;
@@ -26,7 +27,7 @@ const Trips = () => {
     <TripsContainer>
       <MyTripsContainer>
         <TripCard />
-        <TripCard newTrip />
+        <NewTripCard />
       </MyTripsContainer>
     </TripsContainer>
   )

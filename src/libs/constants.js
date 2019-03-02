@@ -5,3 +5,4 @@ export const URLS = {
     register: 'api/register',
   }
 }
+

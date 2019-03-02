@@ -93,70 +93,65 @@ const times = [
 ]
 
 
-const Dropdown = (props) => {
-  const [opened, setOpened] = useState(false);
-  const dropdownListRef = useRef(null);
-  const dropdownHeaderRef = useRef(null);
-  const dropdownListWrapperRef = useRef(null);
-  const selectedItemRef = useRef(null);
-  const [selectedTime, setTime] = useState('01:30am');
+class Dropdown extends React.Component {
+  constructor(props){
+    super(props);
+    this.dropdownListRef =  React.createRef()
+    this.dropdownHeaderRef = React.createRef();
+    this.dropdownListWrapperRef = React.createRef();
+    this.selectedItemRef = React.createRef();
+  }
+  // const [opened, setOpened] = useState(false);
+  // const dropdownListRef = useRef(null);
+  // const dropdownHeaderRef = useRef(null);
+  // const dropdownListWrapperRef = useRef(null);
+  // const selectedItemRef = useRef(null);
+  // const [selectedTime, setTime] = useState('01:30am');
 
-  function handleItemClick(event, title) {
+  handleItemClick(event, title, props) {
     event.preventDefault();
-    console.log(event, title);
+    console.log('item click', props);
     setTime(title);
-    setOpened(false);
+    props.setActivityTime({
+
+    })
+    // setOpened(false);
   }
 
-  function handleOpen() {
-    console.log('ref', dropdownListWrapperRef )
-    console.log('boop', document.getElementById(selectedTime))
+  handleOpen() {
     const selectedEl = document.getElementById(selectedTime);
-    console.log('haha',selectedEl.scrollTop);
     selectedEl.scrollIntoView({
       behavior: 'auto',
       block: 'center',
       inline: 'center'
   });
-    setOpened(true);
-    // const parentDiv = dropdownListWrapperRef.current;
-    // const scrollMath = parentDiv.scrollTop + (parent
-    // // parentDiv.scrollTop = selectedEl.scrollHeight*3;
-    // parentDiv.scrollTop(parentDiv.scrollTop() + (selectedEl.position().top - parentDiv.position().top) - (parentDiv.height()/2) + (selectedEl.height()/2)  )
+    // setOpened(true);
   }
 
-  function handleClickOutside(event) {
+  handleClickOutside(event) {
     // console.log('hit event', event.target)
     if (!dropdownHeaderRef.current.contains(event.target) && !dropdownListWrapperRef.current.contains(event.target)) {
-      setOpened(false);
+      // setOpened(false);
       console.log('You clicked outside of me!');
     }
   }
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+  render() {
+    return (
+      <DropdownContainer>
+        <DropdownHeader ref={dropdownHeaderRef} onClick={handleOpen}>{selectedTime}</DropdownHeader>
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-  })
-  console.log(selectedTime);
-  return (
-    <DropdownContainer>
-
-      <DropdownHeader ref={dropdownHeaderRef} onClick={handleOpen}>{selectedTime}</DropdownHeader>
-
-        <DropdownList opened={opened} ref={dropdownListWrapperRef}>
-          <DropdownUnorderedList aria-labeled="yes" ref={dropdownListRef}>
-          {times.map((time) => (
-            <DropdownListItem id={time.title} onClick={(e) => handleItemClick(e, time.title)}>
-              {time.title}
-            </DropdownListItem>
-          ))}
-          </DropdownUnorderedList>
-        </DropdownList>
-
-    </DropdownContainer>
-  )
+          <DropdownList opened={opened} ref={dropdownListWrapperRef}>
+            <DropdownUnorderedList aria-labeled="yes" ref={dropdownListRef}>
+            {times.map((time) => (
+              <DropdownListItem id={time.title} onClick={(e) => handleItemClick(e, time.title, props)}>
+                {time.title}
+              </DropdownListItem>
+            ))}
+            </DropdownUnorderedList>
+          </DropdownList>
+      </DropdownContainer>
+    )
+  }
 }
 
 export default Dropdown;

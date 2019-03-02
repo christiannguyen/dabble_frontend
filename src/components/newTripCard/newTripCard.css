@@ -1,0 +1,23 @@
+.location-select-container {
+  width: 200px;
+}
+
+.location-select-container .location-select__control {
+  border: none;
+  border-radius: 0px;
+}
+
+.location-select-container .location-select__control--is-focused {
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+
+.location-select-container .location-select__indicators {
+  display: none;
+}
+
+.location-select-container .location-select__value-container {
+  padding: 0;
+}

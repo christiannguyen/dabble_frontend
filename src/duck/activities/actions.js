@@ -35,7 +35,7 @@ const handleSearchInput = (searchInput) => (dispatch) =>  {
       searchInput
     }
   })
-}
+};
 
 export const getActivities = () => async (dispatch, getState) => {
   const { searchActivities } = getState();
@@ -51,4 +51,16 @@ export const getActivities = () => async (dispatch, getState) => {
     console.log('err', error);
     // dispatch(getActivitiesFailure(error));
   }
-}
+};
+
+export const setActivityTime = (data) => ({
+    type: ActivitiesActionTypes.setActivityTime,
+    payload: data,
+});
+
+// export const saveActivity = () => async (dispatch, getState) => {
+//   const { activityTimes } = getState();
+//   try {
+
+//   }
+// };

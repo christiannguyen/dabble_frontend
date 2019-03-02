@@ -4,8 +4,11 @@ import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import AddActivityButton from 'components/addActivityButton/addActivityButton';
 import Activity from 'components/activity/activity';
-import ActivitySearch from 'containers/activitySearch';
+import ActivitySearch from 'containers/activitySearch/activitySearch';
 import AddActivityModal from 'components/addActivityModal/addActivityModal';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { setActivityTime } from 'duck/activities/actions'
 
 const TripContainer = styled.div`
   background-color: #f5f5f5;
@@ -32,17 +35,17 @@ const MyTripsContainer = styled.div`
   display: flex;
 `;
 
-const Trip = () => {
+const Trip = (props) => {
   // useEffect(() => {
   //   baseGet('api/trip');
   // }, [])
+  console.log('props', props)
 
   return (
     <DragDropContextProvider backend={HTML5Backend}>
-    <AddActivityModal />
+    {/* <AddActivityModal actionCreators={props.actionCreators} activityTimes={props.activityTimes}/> */}
       <TripContainer>
         <SidebarContainer>
-          <AddActivityButton/>
         </SidebarContainer>
         <MainViewContainer><ActivitySearch/></MainViewContainer>
       </TripContainer>
@@ -50,4 +53,19 @@ const Trip = () => {
   )
 }
 
-export default Trip;
+
+const mapStateToProp = (state) => ({
+  activityTimes: state.activityTimes,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actionCreators: {
+      ...bindActionCreators({
+        setActivityTime,
+      }, dispatch
+    )}
+  }
+}
+
+export default connect(mapStateToProp, mapDispatchToProps)(Trip);

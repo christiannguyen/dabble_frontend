@@ -1,4 +1,5 @@
 import ActivitiesActionTypes from './types';
+import moment from 'moment';
 
 const initialSearchActivites = {
   loading: false,
@@ -37,4 +38,28 @@ export function searchActivities(state = initialSearchActivites, { type, payload
       return state;
   }
 };
+const FROM_DEFAULT_TIME = moment().hour(10).minute(0);
+const TO_DEFAULT_TIME = moment().hour(11).minute(0);
 
+const initialActivityTimes = {
+  from: FROM_DEFAULT_TIME,
+  to: TO_DEFAULT_TIME,
+  date: null,
+}
+
+export function activityTimes(state = initialActivityTimes, { type, payload }) {
+  switch(type) {
+    case ActivitiesActionTypes.setActivityTime:
+      return {
+        ...state,
+        ...payload,
+      }
+    case ActivitiesActionTypes.setActivityDate:
+      return {
+        ...state,
+        date: payload,
+      }
+    default:
+      return state;
+  }
+}

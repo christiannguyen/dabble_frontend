@@ -5,7 +5,7 @@ import About from '../about'
 import Trips from '../trips';
 import Login from '../login';
 import Register from '../register';
-import Trip from '../trip';
+import Trip from '../trip/trip';
 
 const App = () => (
   <div>
