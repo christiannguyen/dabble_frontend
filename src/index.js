@@ -10,7 +10,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import 'sanitize.css/sanitize.css'
 import './index.css'
 
-const target = document.querySelector('#root')
+const target = document.querySelector('#root');
 
 render(
   <Provider store={store}>
@@ -20,5 +20,5 @@ render(
       </div>
     </ConnectedRouter>
   </Provider>,
-  target
+  target,
 )

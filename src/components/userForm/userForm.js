@@ -39,8 +39,8 @@ function UserForm(props) {
   const { register } = props
 
   function handleSubmit() {
-    const url = register ? 'api/register' : 'api/login'
-    basePost(url, { username, password })
+    const url = register ? 'api/register' : 'api/login';
+    basePost(url, { username, password });
   };
 
   function test() {

@@ -29,6 +29,7 @@ const Trips = (props) => {
   const { actionCreators, newTripDetails } = props;
   const { selectTripDates } = actionCreators;
 
+  console.log('hit trips after');
   return (
     <TripsContainer>
       <MyTripsContainer>
@@ -51,4 +52,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(Trips);
+export default connect(mapStateToProps, mapDispatchToProps)(Trips);
