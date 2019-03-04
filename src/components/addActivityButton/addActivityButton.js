@@ -7,7 +7,7 @@ const Button = styled.button`
   background-color: green;
   width: 200px;
   height: 100px;
-  opacity: ${props => props.isDragging ? "0.5" : "1"};
+  opacity: ${props => props.isDragging ? '0.5' : '1'};
   cursor: move;
 `;
 

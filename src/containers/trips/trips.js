@@ -4,7 +4,7 @@ import { baseGet } from 'libs/api';
 import TripCard from 'components/tripCard/tripCard';
 import NewTripCard from 'components/newTripCard/newTripCard';
 import { bindActionCreators } from 'redux';
-import { selectTripDates } from 'duck/trips/actions';
+import { selectTripDates, createNewTrip, selectLocation } from 'duck/trips/actions';
 import { connect } from 'react-redux';
 
 const TripsContainer = styled.div`
@@ -22,19 +22,23 @@ const MyTripsContainer = styled.div`
 `;
 
 const Trips = (props) => {
-  useEffect(() => {
-    baseGet('api/trip');
-  }, []);
+  // useEffect(() => {
+  //   baseGet('api/trip');
+  // }, []);
 
   const { actionCreators, newTripDetails } = props;
-  const { selectTripDates } = actionCreators;
+  const { selectTripDates, selectLocation, createNewTrip } = actionCreators;
 
-  console.log('hit trips after');
   return (
     <TripsContainer>
       <MyTripsContainer>
         <TripCard />
-        <NewTripCard newTripDetails={newTripDetails} selectTripDates={selectTripDates} />
+        <NewTripCard
+          newTripDetails={newTripDetails}
+          selectTripDates={selectTripDates}
+          createNewTrip={createNewTrip}
+          selectLocation={selectLocation}
+        />
       </MyTripsContainer>
     </TripsContainer>
   );
@@ -48,6 +52,8 @@ const mapDispatchToProps = dispatch => ({
   actionCreators: {
     ...bindActionCreators({
       selectTripDates,
+      createNewTrip,
+      selectLocation,
     }, dispatch),
   },
 });

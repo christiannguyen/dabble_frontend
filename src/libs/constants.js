@@ -5,4 +5,5 @@ export const URLS = {
     register: 'api/register',
     isLoggedIn: 'api/logged_in',
   },
+  trips: 'api/trips',
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { baseGet } from 'libs/api';
 import { URLS } from 'libs/constants';
@@ -13,27 +14,7 @@ import Register from '../register';
 import Trip from '../trip/trip';
 
 function PrivateRoute({ component: Component, ...rest }) {
-  // const [isLoading, setLoading] = useState(true);
-  // const [isAuthenticated, setAuth] = useState(false);
-
-  // async function authenticateUser() {
-    //   const response = await baseGet(URLS.user.isLoggedIn);
-    //   const { loggedIn } = response.data;
-    //   setAuth(loggedIn);
-    //   setLoading(false);
-    // }
-
-    const { isLoggedIn } = rest;
-    console.log('private route', isLoggedIn);
-  //   // useEffect(() => {
-  //   //   startupUser();
-  //   // }, []);
-
-
-  // console.log('boop')
-  // console.log('user from private', user);
-
-
+  const { isLoggedIn } = rest;
   return (
     <Route
       {...rest}
@@ -54,7 +35,7 @@ function PrivateRoute({ component: Component, ...rest }) {
 
 const App = (props) => {
   const { startupUserCall, user } = props;
-
+  console.log('app')
   useEffect(() => {
     startupUserCall();
   }, []);
@@ -67,10 +48,10 @@ const App = (props) => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/about-us" component={About} />
-      <Route exact path="/trips" component={Trips} />
+      <PrivateRoute exact path="/trips" component={Trips} isLoggedIn={user.isLoggedIn}/>
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
-      <PrivateRoute exact path="/trip" component={Trip} user={user} isLoggedIn={user.isLoggedIn} />
+      <PrivateRoute exact path="/trip" component={Trip} isLoggedIn={user.isLoggedIn} />
     </Switch>
   );
 };
@@ -89,4 +70,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

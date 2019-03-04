@@ -52,7 +52,7 @@ const CreateTripButton = styled.button`
   border-radius: 10px;
   color: #fff;
   width: 250px;
-  background-color: blue;
+  background-color: ${props => props.disabled ? 'gray' : 'blue'};
 `;
 
 const options = [
@@ -93,8 +93,15 @@ class NewTripCard extends React.Component {
   }
 
   render() {
-    const { newTripDetails: { startDate, endDate } } = this.props;
+    const {
+      newTripDetails: { startDate, endDate, location },
+      createNewTrip,
+      selectLocation,
+    } = this.props;
     const { isCreating, focusedInput } = this.state;
+    const disabledCreate = !(startDate && endDate && location);
+    console.log('disableCreate', disabledCreate, location);
+    console.log('props', this.props);
     return (
       <div>
         {isCreating
@@ -103,6 +110,8 @@ class NewTripCard extends React.Component {
               <Select
                 className="location-select-container"
                 classNamePrefix="location-select"
+                value={location}
+                onChange={selectLocation}
                 placeholder="Where do you want to go?"
                 options={options}
                 autoFocus
@@ -118,7 +127,12 @@ class NewTripCard extends React.Component {
               focusedInput={focusedInput} //
               onFocusChange={newFocusInput => this.setState({ focusedInput: newFocusInput })}
             />
-            <CreateTripButton>Add Trip</CreateTripButton>
+            <CreateTripButton
+              onClick={disabledCreate ? undefined : createNewTrip}
+              disabled={disabledCreate}
+            >
+              Add Trip
+            </CreateTripButton>
             </CardContainer>
           : <NewTripCardContainer
             onClick={this.handleCardClick}

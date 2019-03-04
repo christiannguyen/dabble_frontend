@@ -23,6 +23,5 @@ export const startupUser = async (dispatch) => {
     dispatch(setLoading(false));
   } catch (err) {
     dispatch(setLoading(false));
-    console.log('err', err);
   }
 };
