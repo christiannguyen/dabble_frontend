@@ -37,10 +37,10 @@ const MyTripsContainer = styled.div`
 
 const Trip = (props) => {
   // useEffect(() => {
-  //   baseGet('api/trip');
+  //   baseGet('api/trip?');
   // }, [])
-  console.log('props', props);
 
+  console.log('trip pop', props);
   return (
     <DragDropContextProvider backend={HTML5Backend}>
       {/* <AddActivityModal actionCreators={props.actionCreators} activityTimes={props.activityTimes}/> */}

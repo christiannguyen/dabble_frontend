@@ -16,26 +16,17 @@ const Location = styled.p`
 
 `;
 
-class TripCard extends React.Component {
-  render() {
-    const { newTrip } = this.props;
-    return (
-      <React.Fragment>
-        <TripCardContainer>
-          <Location>New York</Location>
-        </TripCardContainer>
-        {/* <DateRangePicker
-          startDateId="startDate"
-          endDateId="endDate"
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          onDatesChange={({ startDate, endDate }) => { this.setState({ startDate, endDate })}}
-          focusedInput={this.state.focusedInput}
-          onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
-        /> */}
-      </React.Fragment>
-    )
+const TripCard = (props) => {
+  const { location, startDate, endDate, shortUrl } = props;
+
+  function handleClick() {
+    console.log('shorturl', shortUrl);
   }
+  return (
+    <TripCardContainer onClick={handleClick}>
+      <Location>{location}</Location>
+    </TripCardContainer>
+  )
 }
 
 export default TripCard;

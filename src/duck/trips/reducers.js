@@ -8,7 +8,6 @@ const initialNewTripState = {
 };
 
 export function newTripDetails(state = initialNewTripState, { type, payload }) {
-  console.log('payload', payload);
   switch (type) {
     case TripActionTypes.selectDates:
       return {
@@ -22,6 +21,31 @@ export function newTripDetails(state = initialNewTripState, { type, payload }) {
       };
     case TripActionTypes.resetNewCard:
       return initialNewTripState;
+    default:
+      return state;
+  }
+}
+
+const initialMyTripsState = {
+  trips: [],
+  isLoading: false,
+};
+
+export function usersTrips(state = initialMyTripsState, { type, payload }) {
+  switch (type) {
+    case TripActionTypes.requestingUsersTrips: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case TripActionTypes.requestingUsersTripsSuccess: {
+      return {
+        ...state,
+        trips: payload,
+        isLoading: false,
+      };
+    }
     default:
       return state;
   }

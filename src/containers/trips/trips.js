@@ -4,8 +4,9 @@ import { baseGet } from 'libs/api';
 import TripCard from 'components/tripCard/tripCard';
 import NewTripCard from 'components/newTripCard/newTripCard';
 import { bindActionCreators } from 'redux';
-import { selectTripDates, createNewTrip, selectLocation } from 'duck/trips/actions';
+import { selectTripDates, createNewTrip, selectLocation, getUsersTrips } from 'duck/trips/actions';
 import { connect } from 'react-redux';
+import Trip from 'containers/trip/trip';
 
 const TripsContainer = styled.div`
   background-color: #f5f5f5;
@@ -22,16 +23,27 @@ const MyTripsContainer = styled.div`
 `;
 
 const Trips = (props) => {
-  // useEffect(() => {
-  //   baseGet('api/trip');
-  // }, []);
+  useEffect(() => {
+    props.getUsersTrips();
+  }, []);
 
-  const { actionCreators, newTripDetails } = props;
-  const { selectTripDates, selectLocation, createNewTrip } = actionCreators;
+  const { newTripDetails, selectTripDates, selectLocation, createNewTrip, usersTrips } = props;
+  const { isLoading, trips } = usersTrips;
 
+  if (isLoading) {
+    return null;
+  }
+
+  console.log('trips', trips);
   return (
     <TripsContainer>
       <MyTripsContainer>
+        {trips.map((trip) => {
+          const { location, start_date: startDate, end_date: endDate, short_url: shortUrl } = trip;
+          return (
+            <TripCard location={location} startDate={startDate} endDate={endDate} shortUrl={shortUrl} />
+          );
+        })}
         <TripCard />
         <NewTripCard
           newTripDetails={newTripDetails}
@@ -46,16 +58,16 @@ const Trips = (props) => {
 
 const mapStateToProps = state => ({
   newTripDetails: state.newTripDetails,
+  usersTrips: state.usersTrips,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actionCreators: {
-    ...bindActionCreators({
-      selectTripDates,
-      createNewTrip,
-      selectLocation,
-    }, dispatch),
-  },
+  ...bindActionCreators({
+    selectTripDates,
+    createNewTrip,
+    selectLocation,
+    getUsersTrips,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trips);

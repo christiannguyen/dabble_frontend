@@ -1,9 +1,11 @@
+const BASE_URL = 'http://localhost:3000';
+
 export const URLS = {
-  activities: 'api/activities',
+  activities: `${BASE_URL}/api/activities`,
   user: {
     login: 'api/login',
     register: 'api/register',
-    isLoggedIn: 'api/logged_in',
+    isLoggedIn: `${BASE_URL}/api/logged_in`,
   },
-  trips: 'api/trips',
+  trips: `${BASE_URL}/api/trips`,
 };

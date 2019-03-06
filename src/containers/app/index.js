@@ -35,10 +35,14 @@ function PrivateRoute({ component: Component, ...rest }) {
 
 const App = (props) => {
   const { startupUserCall, user } = props;
-  console.log('app')
   useEffect(() => {
+    console.log('calls effect', props);
     startupUserCall();
   }, []);
+
+
+
+  console.log('user', user);
 
   if (user.isLoading) {
     return null;
@@ -48,10 +52,10 @@ const App = (props) => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/about-us" component={About} />
-      <PrivateRoute exact path="/trips" component={Trips} isLoggedIn={user.isLoggedIn}/>
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
-      <PrivateRoute exact path="/trip" component={Trip} isLoggedIn={user.isLoggedIn} />
+      <PrivateRoute path="/trip/:slug" component={Trips} isLoggedIn={user.isLoggedIn} />
+      <PrivateRoute exact path="/trips" component={Trips} isLoggedIn={user.isLoggedIn} />
     </Switch>
   );
 };
