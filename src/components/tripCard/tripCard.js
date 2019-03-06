@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DateRangePicker } from 'react-dates';
+import { Link } from 'react-router-dom';
 
 const TripCardContainer = styled.div`
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
@@ -23,10 +24,12 @@ const TripCard = (props) => {
     console.log('shorturl', shortUrl);
   }
   return (
-    <TripCardContainer onClick={handleClick}>
-      <Location>{location}</Location>
-    </TripCardContainer>
-  )
+    <Link to={`/trip/${shortUrl}`}>
+      <TripCardContainer onClick={handleClick}>
+        <Location>{location}</Location>
+      </TripCardContainer>
+    </Link>
+  );
 }
 
 export default TripCard;

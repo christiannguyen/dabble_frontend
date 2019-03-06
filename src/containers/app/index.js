@@ -54,7 +54,7 @@ const App = (props) => {
       <Route exact path="/about-us" component={About} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
-      <PrivateRoute path="/trip/:slug" component={Trips} isLoggedIn={user.isLoggedIn} />
+      <PrivateRoute path="/trip/:slug" component={Trip} isLoggedIn={user.isLoggedIn} />
       <PrivateRoute exact path="/trips" component={Trips} isLoggedIn={user.isLoggedIn} />
     </Switch>
   );
