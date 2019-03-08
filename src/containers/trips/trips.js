@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { baseGet } from 'libs/api';
 import TripCard from 'components/tripCard/tripCard';
 import NewTripCard from 'components/newTripCard/newTripCard';
 import { bindActionCreators } from 'redux';
 import { selectTripDates, createNewTrip, selectLocation, getUsersTrips } from 'duck/trips/actions';
 import { connect } from 'react-redux';
-import Trip from 'containers/trip/trip';
 
 const TripsContainer = styled.div`
   background-color: #f5f5f5;

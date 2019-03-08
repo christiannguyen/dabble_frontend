@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -6,11 +8,10 @@ import AddActivityButton from 'components/addActivityButton/addActivityButton';
 import Activity from 'components/activity/activity';
 import ActivitySearch from 'containers/activitySearch/activitySearch';
 import AddActivityModal from 'components/addActivityModal/addActivityModal';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { setActivityTime } from 'duck/activities/actions';
 import CalendarView from 'containers/calendarView/calendarView';
-import TripHeader from '../../components/tripHeader/tripHeader';
+import { getSelectedTrip } from 'duck/trips/actions';
+import { baseGet } from 'libs/api';
+import TripHeader from 'components/tripHeader/tripHeader';
 
 const TripWrapper = styled.div`
   background-color: #f5f5f5;
@@ -29,21 +30,16 @@ const SidebarContainer = styled.div`
   height: 100vh;
 `;
 
-const MyTripsContainer = styled.div`
-  width: 1000px;
-  height: 400px;
-  padding-top: 50px;
-  margin: 0 auto;
-  display: flex;
-`;
-
 const Trip = (props) => {
-  // useEffect(() => {
-  //   baseGet('api/trip?');
-  // }, [])
+  const { selectedTrip, match, getSelectedTrip } = props;
 
-  console.log('trip pop', props);
-  console.log('slug', props.match.params.slug)
+  useEffect(() => {
+    getSelectedTrip(match.params.slug);
+  }, []);
+
+  if (selectedTrip.isLoading) {
+    return null;
+  }
   return (
     <DragDropContextProvider backend={HTML5Backend}>
       {/* <AddActivityModal actionCreators={props.actionCreators} activityTimes={props.activityTimes}/> */}
@@ -61,15 +57,13 @@ const Trip = (props) => {
 
 
 const mapStateToProp = state => ({
-  activityTimes: state.activityTimes,
+  selectedTrip: state.selectedTrip,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actionCreators: {
-    ...bindActionCreators({
-      setActivityTime,
-    }, dispatch),
-},
+  ...bindActionCreators({
+    getSelectedTrip,
+  }, dispatch),
 });
 
 export default connect(mapStateToProp, mapDispatchToProps)(Trip);

@@ -30,7 +30,7 @@ export const createNewTrip = () => async (dispatch, getState) => {
   }
 };
 
-const getUsersTripSuccess = payload => ({
+const getUsersTripsSuccess = payload => ({
   type: TripsActionTypes.requestingUsersTripsSuccess,
   payload,
 });
@@ -38,9 +38,26 @@ const getUsersTripSuccess = payload => ({
 export const getUsersTrips = () => async (dispatch) => {
   try {
     dispatch({ type: TripsActionTypes.requestingUsersTrips });
-    const response = await baseGet('api/trips');
+    const response = await baseGet(URLS.trips);
     const trips = response.data;
-    dispatch(getUsersTripSuccess(trips));
+    dispatch(getUsersTripsSuccess(trips));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getSelectedTripSuccess = payload => ({
+  type: TripsActionTypes.requestingSelectedTripSuccess,
+  payload,
+});
+
+export const getSelectedTrip = shortUrl => async (dispatch) => {
+  try {
+    console.log('calls this')
+    dispatch({ type: TripsActionTypes.requestingSelectedTrip });
+    const response = await baseGet(URLS.trip(shortUrl));
+    const tripInfo = response.data;
+    dispatch(getSelectedTripSuccess(tripInfo));
   } catch (err) {
     console.log(err);
   }

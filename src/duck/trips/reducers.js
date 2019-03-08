@@ -33,20 +33,41 @@ const initialMyTripsState = {
 
 export function usersTrips(state = initialMyTripsState, { type, payload }) {
   switch (type) {
-    case TripActionTypes.requestingUsersTrips: {
+    case TripActionTypes.requestingUsersTrips:
       return {
         ...state,
         isLoading: true,
       };
-    }
-    case TripActionTypes.requestingUsersTripsSuccess: {
+    case TripActionTypes.requestingUsersTripsSuccess:
       return {
         ...state,
         trips: payload,
         isLoading: false,
       };
-    }
     default:
       return state;
+  }
+}
+
+const initialSelectedTripState = {
+  isLoading: false,
+  tripInfo: {},
+};
+
+export const selectedTrip = (state = initialSelectedTripState, { type, payload }) => {
+  switch (type) {
+    case TripActionTypes.requestingSelectedTrip:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case TripActionTypes.requestingSelectedTripSuccess:
+      return {
+        ...state,
+        tripsInfo: { ...payload },
+        isLoading: false,
+      };
+    default:
+      return null;
   }
 }

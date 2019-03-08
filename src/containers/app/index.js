@@ -11,7 +11,7 @@ import About from '../about';
 import Trips from '../trips/trips';
 import Login from '../login';
 import Register from '../register';
-import Trip from '../trip/trip';
+import Trip from '../trip';
 
 function PrivateRoute({ component: Component, ...rest }) {
   const { isLoggedIn } = rest;

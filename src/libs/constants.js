@@ -8,4 +8,5 @@ export const URLS = {
     isLoggedIn: `${BASE_URL}/api/logged_in`,
   },
   trips: `${BASE_URL}/api/trips`,
+  trip: shortUrl => `${BASE_URL}/api/trips/${shortUrl}`,
 };
