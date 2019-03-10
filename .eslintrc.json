@@ -1,32 +1,30 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": "airbnb",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "import/no-unresolved": 0,
-        "react/jsx-filename-extension": 0,
-        "import/prefer-default-export": 0,
-        "react/jsx-wrap-multilines": 0,
-        "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }],
-        "no-confusing-arrow": 0,
-        "import/no-extraneous-dependencies": 0,
-        "no-shadow": 0
-    }
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "import/no-unresolved": 0,
+    "react/jsx-filename-extension": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-wrap-multilines": 0,
+    "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }],
+    "no-confusing-arrow": 0,
+    "import/no-extraneous-dependencies": 0,
+    "no-shadow": 0
+  }
 }

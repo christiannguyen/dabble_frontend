@@ -64,10 +64,12 @@ export const selectedTrip = (state = initialSelectedTripState, { type, payload }
     case TripActionTypes.requestingSelectedTripSuccess:
       return {
         ...state,
-        tripsInfo: { ...payload },
+        tripInfo: {
+          ...payload,
+        },
         isLoading: false,
       };
     default:
-      return null;
+      return state;
   }
-}
+};

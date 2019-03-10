@@ -6,7 +6,7 @@ import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import AddActivityButton from 'components/addActivityButton/addActivityButton';
 import Activity from 'components/activity/activity';
-import ActivitySearch from 'containers/activitySearch/activitySearch';
+import ActivitySearchView from 'containers/activitySearchView';
 import AddActivityModal from 'components/addActivityModal/addActivityModal';
 import CalendarView from 'containers/calendarView/calendarView';
 import { getSelectedTrip } from 'duck/trips/actions';
@@ -32,12 +32,12 @@ const SidebarContainer = styled.div`
 
 const Trip = (props) => {
   const { selectedTrip, match, getSelectedTrip } = props;
-
+  const { isLoading, tripInfo } = selectedTrip;
   useEffect(() => {
     getSelectedTrip(match.params.slug);
   }, []);
 
-  if (selectedTrip.isLoading) {
+  if (isLoading) {
     return null;
   }
   return (
@@ -46,24 +46,29 @@ const Trip = (props) => {
       <TripWrapper>
         <SidebarContainer />
         <MainViewContainer>
-          <TripHeader />
-          <CalendarView />
-          {/* <ActivitySearch /> */}
+          <TripHeader {...tripInfo} />
+          {/* <CalendarView /> */}
+          <ActivitySearchView />
         </MainViewContainer>
       </TripWrapper>
     </DragDropContextProvider>
   );
 };
 
-
 const mapStateToProp = state => ({
   selectedTrip: state.selectedTrip,
 });
 
 const mapDispatchToProps = dispatch => ({
-  ...bindActionCreators({
-    getSelectedTrip,
-  }, dispatch),
+  ...bindActionCreators(
+    {
+      getSelectedTrip,
+    },
+    dispatch,
+  ),
 });
 
-export default connect(mapStateToProp, mapDispatchToProps)(Trip);
+export default connect(
+  mapStateToProp,
+  mapDispatchToProps,
+)(Trip);

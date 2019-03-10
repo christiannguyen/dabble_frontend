@@ -21,6 +21,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "connected-react-router": "4.5.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "merge": "^1.2.1",
     "moment": "^2.24.0",
     "rc-time-picker": "^3.6.2",
@@ -37,6 +39,7 @@
     "react-select": "^2.4.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
+    "reselect": "^4.0.0",
     "sanitize.css": "7.0.3",
     "serve": "10.1.2",
     "styled-components": "^4.1.3"

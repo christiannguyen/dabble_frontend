@@ -1,31 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
 
-function SearchBar(props) {
+const SearchbarWrapper = styled.div`
+  padding-top: 20px;
+`
 
-  const [searchInput, setSearch] = useState('');
-  // const { submitFunction }
+const SearchbarInput = styled.input`
+  border-radius: 5px;
+  display: block;
+  width: 200px;
+  margin: auto;
+  padding: 5px 10px;
+  border: 2px solid #e8e8e8;
+  background-color: #f5f5f5;
+`
 
-    // useEffect(() => {
-    //   function handleKeyDown(e) {
-    //     e.preventDefault();
-    //     console.log('e', e);
-    //     console.log('key', e.key)
-    //   }
+const SearchBar = ({ handleSearchInput, handleSearch }) => {
+  function handleChange(e) {
+    const { value } = e.target
+    handleSearchInput(value)
+  }
 
-    //   // e.key = "Enter"
-    //   //  e.keyCode = 13
-    //   // Note: this implementation is a bit simplified
-    //   window.addEventListener('keydown', handleKeyDown);
-    //   return () => window.removeEventListener('keydown', handleKeyDown);
-    // }, []);
+  function handleKeyPress(e) {
+    if (e.keyCode === 13 || e.key === 'Enter') {
+      handleSearch()
+    }
+  }
 
   return (
-    <div>
-      <p>{searchInput}</p>
-      <input onChange={(e) => setSearch(e.target.value) }/>
-      {/* <button></button> */}
-    </div>
+    <SearchbarWrapper>
+      <SearchbarInput
+        onKeyPress={handleKeyPress}
+        onChange={handleChange}
+        placeholder="Search"
+      />
+    </SearchbarWrapper>
   )
 }
 
-export default SearchBar;
+export default SearchBar
